@@ -1,5 +1,5 @@
 {
-  "name": "@limitly/sdk",
+  "name": "@limitly/limitly-js",
   "version": "1.0.0",
   "description": "Official SDK for Node.js for Limitly - Management of API Keys, plans, users and request validation",
   "main": "dist/index.js",
