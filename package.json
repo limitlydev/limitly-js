@@ -1,0 +1,76 @@
+{
+  "name": "@limitly/sdk",
+  "version": "1.0.0",
+  "description": "SDK oficial de Node.js para Limitly - Gestión de API Keys, planes, usuarios y validación de requests",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:tsc": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "prepublishOnly": "npm run build",
+    "clean": "rimraf dist",
+    "example": "node examples/basic-usage.js",
+    "example:express": "node examples/express-middleware.js"
+  },
+  "keywords": [
+    "limitly",
+    "api",
+    "rate-limiting",
+    "api-keys",
+    "sdk",
+    "nodejs",
+    "typescript"
+  ],
+  "author": "Limitly Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/limitly/sdk-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/limitly/sdk-node/issues"
+  },
+  "homepage": "https://github.com/limitly/sdk-node#readme",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.5.0",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.5.0",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+} 
