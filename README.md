@@ -1,111 +1,111 @@
-# @limitly/sdk
+# @limitly/limitly-js
 
-SDK oficial de Node.js para Limitly - Gestión de API Keys, planes, usuarios y validación de requests.
+Official Node.js SDK for Limitly - API Key management, plans, users and request validation.
 
-## 🚀 Instalación
+## 🚀 Installation
 
 ```bash
-npm install @limitly/sdk
+npm install @limitly/limitly-js
 ```
 
-## 📖 Uso Básico
+## 📖 Basic Usage
 
-### Inicialización
+### Initialization
 
 ```typescript
-import { Limitly } from '@limitly/sdk';
+import { Limitly } from '@limitly/limitly-js';
 
 const limitly = new Limitly({
-  apiKey: 'tu_api_key_de_limitly'
+  apiKey: 'your_limitly_api_key'
 });
 ```
 
-### Validación de Requests
+### Request Validation
 
-El caso de uso más común es validar requests de tus usuarios:
+The most common use case is validating your users' requests:
 
 ```typescript
-// Validar una request
+// Validate a request
 const result = await limitly.validation.validate(
-  'api_key_del_usuario',
+  'user_api_key',
   '/api/users',
   'GET'
 );
 
 if (result.success) {
-  console.log('Request permitida');
-  console.log('Uso actual:', result.details?.current_usage);
-  console.log('Límite:', result.details?.limit);
+  console.log('Request allowed');
+  console.log('Current usage:', result.details?.current_usage);
+  console.log('Limit:', result.details?.limit);
 } else {
-  console.log('Request denegada:', result.error);
+  console.log('Request denied:', result.error);
 }
 ```
 
-### Gestión de API Keys
+### API Key Management
 
 ```typescript
-// Listar todas las API Keys
+// List all API Keys
 const keys = await limitly.apiKeys.list();
 console.log('API Keys:', keys.data);
 
-// Crear una nueva API Key
+// Create a new API Key
 const newKey = await limitly.apiKeys.create({
-  name: 'Nueva API Key',
+  name: 'New API Key',
   user_id: 123
 });
-console.log('Nueva API Key:', newKey.data?.api_key);
+console.log('New API Key:', newKey.data?.api_key);
 
-// Obtener uso de una API Key
+// Get usage for an API Key
 const usage = await limitly.apiKeys.getUsage('key-id');
-console.log('Uso:', usage.data);
+console.log('Usage:', usage.data);
 ```
 
-### Gestión de Planes
+### Plan Management
 
 ```typescript
-// Crear un plan
+// Create a plan
 const plan = await limitly.plans.create({
-  name: 'Plan Básico',
-  description: 'Plan para usuarios básicos',
+  name: 'Basic Plan',
+  description: 'Plan for basic users',
   max_requests: 10000,
   request_period: 'month'
 });
 
-// Obtener estadísticas de uso del plan
+// Get plan usage statistics
 const planUsage = await limitly.plans.getUsage(plan.data?.id);
-console.log('Uso del plan:', planUsage.data);
+console.log('Plan usage:', planUsage.data);
 ```
 
-### Gestión de Usuarios
+### User Management
 
 ```typescript
-// Crear un usuario
+// Create a user
 const user = await limitly.users.create({
-  name: 'Juan Pérez',
-  email: 'juan@example.com',
+  name: 'John Doe',
+  email: 'john@example.com',
   plan_id: 'plan-id'
 });
 
-// Obtener uso de un usuario
+// Get user usage
 const userUsage = await limitly.users.getUsage(user.data?.user_id);
-console.log('Uso del usuario:', userUsage.data);
+console.log('User usage:', userUsage.data);
 ```
 
-## 🔧 Configuración
+## 🔧 Configuration
 
-### Opciones de Configuración
+### Configuration Options
 
 ```typescript
 const limitly = new Limitly({
-  apiKey: 'tu_api_key_de_limitly',
-  baseUrl: 'https://tu-proyecto.supabase.co/functions/v1', // opcional
-  timeout: 30000 // opcional, default: 30000ms
+  apiKey: 'your_limitly_api_key',
+  baseUrl: 'https://your-project.supabase.co/functions/v1', // optional
+  timeout: 30000 // optional, default: 30000ms
 });
 ```
 
-### Opciones de Request
+### Request Options
 
-Puedes pasar opciones adicionales a cualquier método:
+You can pass additional options to any method:
 
 ```typescript
 const result = await limitly.apiKeys.list({
@@ -116,27 +116,27 @@ const result = await limitly.apiKeys.list({
 });
 ```
 
-## 📚 API Completa
+## 📚 Complete API
 
-### Validación de Requests
+### Request Validation
 
 #### `validation.validate(apiKey, endpoint, method, options?)`
-Valida una request de un usuario.
+Validates a user request.
 
 ```typescript
 const result = await limitly.validation.validate(
-  'api_key_del_usuario',
+  'user_api_key',
   '/api/users',
   'GET'
 );
 ```
 
 #### `validation.validateRequest(data, options?)`
-Valida una request con objeto de datos.
+Validates a request with data object.
 
 ```typescript
 const result = await limitly.validation.validateRequest({
-  api_key: 'api_key_del_usuario',
+  api_key: 'user_api_key',
   endpoint: '/api/users',
   method: 'GET'
 });
@@ -145,50 +145,50 @@ const result = await limitly.validation.validateRequest({
 ### API Keys
 
 #### `apiKeys.list(options?)`
-Lista todas las API Keys.
+Lists all API Keys.
 
 #### `apiKeys.create(data, options?)`
-Crea una nueva API Key.
+Creates a new API Key.
 
 ```typescript
 const key = await limitly.apiKeys.create({
-  name: 'Nueva API Key',
-  user_id: 123, // opcional
-  plan_id: 'plan-id', // opcional
-  status: 'active' // opcional
+  name: 'New API Key',
+  user_id: 123, // optional
+  plan_id: 'plan-id', // optional
+  status: 'active' // optional
 });
 ```
 
 #### `apiKeys.get(keyId, options?)`
-Obtiene una API Key específica.
+Gets a specific API Key.
 
 #### `apiKeys.update(keyId, data, options?)`
-Actualiza una API Key.
+Updates an API Key.
 
 #### `apiKeys.delete(keyId, options?)`
-Elimina una API Key (soft delete).
+Deletes an API Key (soft delete).
 
 #### `apiKeys.regenerate(keyId, options?)`
-Regenera una API Key.
+Regenerates an API Key.
 
 #### `apiKeys.getUsage(keyId, options?)`
-Obtiene estadísticas de uso de una API Key.
+Gets usage statistics for an API Key.
 
 #### `apiKeys.getRequests(keyId, options?)`
-Obtiene el historial de requests de una API Key.
+Gets request history for an API Key.
 
-### Planes
+### Plans
 
 #### `plans.list(options?)`
-Lista todos los planes.
+Lists all plans.
 
 #### `plans.create(data, options?)`
-Crea un nuevo plan.
+Creates a new plan.
 
 ```typescript
 const plan = await limitly.plans.create({
-  name: 'Plan Básico',
-  description: 'Plan para usuarios básicos',
+  name: 'Basic Plan',
+  description: 'Plan for basic users',
   max_requests: 10000,
   request_period: 'month', // 'day', 'week', 'month', 'year'
   is_active: true
@@ -196,92 +196,92 @@ const plan = await limitly.plans.create({
 ```
 
 #### `plans.get(planId, options?)`
-Obtiene un plan específico.
+Gets a specific plan.
 
 #### `plans.update(planId, data, options?)`
-Actualiza un plan.
+Updates a plan.
 
 #### `plans.delete(planId, options?)`
-Elimina un plan.
+Deletes a plan.
 
 #### `plans.getUsage(planId, options?)`
-Obtiene estadísticas de uso de un plan.
+Gets usage statistics for a plan.
 
 #### `plans.getUsers(planId, options?)`
-Obtiene todos los usuarios asignados a un plan.
+Gets all users assigned to a plan.
 
 #### `plans.getKeys(planId, options?)`
-Obtiene todas las API Keys asignadas a un plan.
+Gets all API Keys assigned to a plan.
 
-### Usuarios
+### Users
 
 #### `users.list(options?)`
-Lista todos los usuarios.
+Lists all users.
 
 #### `users.create(data, options?)`
-Crea un nuevo usuario.
+Creates a new user.
 
 ```typescript
 const user = await limitly.users.create({
-  name: 'Juan Pérez',
-  email: 'juan@example.com', // opcional
-  plan_id: 'plan-id', // opcional
-  custom_start: '2024-01-01T00:00:00.000Z' // opcional
+  name: 'John Doe',
+  email: 'john@example.com', // optional
+  plan_id: 'plan-id', // optional
+  custom_start: '2024-01-01T00:00:00.000Z' // optional
 });
 ```
 
 #### `users.get(userId, options?)`
-Obtiene un usuario específico.
+Gets a specific user.
 
 #### `users.update(userId, data, options?)`
-Actualiza un usuario.
+Updates a user.
 
 #### `users.delete(userId, options?)`
-Elimina un usuario.
+Deletes a user.
 
 #### `users.getUsage(userId, options?)`
-Obtiene el uso de un usuario.
+Gets user usage.
 
 #### `users.getKeys(userId, options?)`
-Obtiene todas las API Keys de un usuario.
+Gets all API Keys for a user.
 
 #### `users.createKey(userId, data, options?)`
-Crea una nueva API Key para un usuario.
+Creates a new API Key for a user.
 
 ```typescript
 const key = await limitly.users.createKey(123, {
-  name: 'API Key para Juan'
+  name: 'API Key for John'
 });
 ```
 
-## 🛠️ Manejo de Errores
+## 🛠️ Error Handling
 
-El SDK lanza errores específicos que puedes capturar:
+The SDK throws specific errors that you can catch:
 
 ```typescript
 try {
   const result = await limitly.validation.validate(
-    'api_key_invalida',
+    'invalid_api_key',
     '/api/users',
     'GET'
   );
 } catch (error) {
   if (error instanceof LimitlyError) {
-    console.log('Error de Limitly:', error.message);
-    console.log('Código de estado:', error.statusCode);
-    console.log('Respuesta completa:', error.response);
+    console.log('Limitly error:', error.message);
+    console.log('Status code:', error.statusCode);
+    console.log('Full response:', error.response);
   } else {
-    console.log('Error inesperado:', error);
+    console.log('Unexpected error:', error);
   }
 }
 ```
 
-## 🔍 Ejemplos Avanzados
+## 🔍 Advanced Examples
 
-### Middleware para Express
+### Express Middleware
 
 ```typescript
-import { Limitly } from '@limitly/sdk';
+import { Limitly } from '@limitly/limitly-js';
 import express from 'express';
 
 const app = express();
@@ -289,12 +289,12 @@ const limitly = new Limitly({
   apiKey: process.env.LIMITLY_API_KEY
 });
 
-// Middleware de validación
+// Validation middleware
 app.use(async (req, res, next) => {
   const apiKey = req.headers.authorization?.replace('Bearer ', '');
   
   if (!apiKey) {
-    return res.status(401).json({ error: 'API Key requerida' });
+    return res.status(401).json({ error: 'API Key required' });
   }
 
   try {
@@ -313,16 +313,16 @@ app.use(async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error('Error de validación:', error);
-    res.status(500).json({ error: 'Error interno' });
+    console.error('Validation error:', error);
+    res.status(500).json({ error: 'Internal error' });
   }
 });
 ```
 
-### Monitoreo de Uso
+### Usage Monitoring
 
 ```typescript
-// Monitorear uso de API Keys
+// Monitor API Key usage
 async function monitorUsage() {
   const keys = await limitly.apiKeys.list();
   
@@ -330,33 +330,33 @@ async function monitorUsage() {
     const usage = await limitly.apiKeys.getUsage(key.id);
     
     if (usage.data && usage.data.percentageUsed > 80) {
-      console.log(`⚠️ API Key ${key.name} está al ${usage.data.percentageUsed}% de uso`);
+      console.log(`⚠️ API Key ${key.name} is at ${usage.data.percentageUsed}% usage`);
     }
   }
 }
 ```
 
-### Gestión Automática de Planes
+### Automatic Plan Management
 
 ```typescript
-// Crear planes predefinidos
+// Create predefined plans
 async function setupDefaultPlans() {
   const plans = [
     {
-      name: 'Plan Básico',
-      description: 'Para usuarios nuevos',
+      name: 'Basic Plan',
+      description: 'For new users',
       max_requests: 1000,
       request_period: 'month'
     },
     {
-      name: 'Plan Pro',
-      description: 'Para usuarios avanzados',
+      name: 'Pro Plan',
+      description: 'For advanced users',
       max_requests: 10000,
       request_period: 'month'
     },
     {
-      name: 'Plan Enterprise',
-      description: 'Sin límites',
+      name: 'Enterprise Plan',
+      description: 'Unlimited',
       max_requests: -1,
       request_period: 'month'
     }
@@ -368,35 +368,35 @@ async function setupDefaultPlans() {
 }
 ```
 
-## 📦 Estructura del Proyecto
+## 📦 Project Structure
 
 ```
 src/
-├── index.ts          # Clase principal del SDK
-├── client.ts         # Cliente HTTP base
-├── types/            # Definiciones de tipos TypeScript
+├── index.ts          # Main SDK class
+├── client.ts         # Base HTTP client
+├── types/            # TypeScript type definitions
 │   └── index.ts
-└── modules/          # Módulos específicos
+└── modules/          # Specific modules
     ├── api-keys.ts
     ├── plans.ts
     ├── users.ts
     └── validation.ts
 ```
 
-## 🤝 Contribución
+## 🤝 Contributing
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-## 🆘 Soporte
+## 🆘 Support
 
-- 📧 Email: support@limitly.com
-- 📖 Documentación: https://docs.limitly.com
-- 🐛 Issues: https://github.com/limitly/sdk-node/issues 
+- 📧 Email: hi@limitly.dev
+- 📖 Documentation: https://docs.limitly.com
+- 🐛 Issues: https://github.com/limitlydev/limitly-js/issues 
