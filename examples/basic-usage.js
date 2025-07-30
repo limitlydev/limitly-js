@@ -2,7 +2,7 @@ const { Limitly } = require('../dist/index');
 
 // Initialize the SDK
 const limitly = new Limitly({
-  apiKey: process.env.LIMITLY_API_KEY || 'lk_9OQ70zfdjjj1ScVcUYgVNdDe9kWLU5IN-veV3uF9Uc4='
+  apiKey: process.env.LIMITLY_API_KEY || ''
 });
 
 async function basicExample() {
@@ -12,7 +12,7 @@ async function basicExample() {
     // 1. Validate a request
     console.log('1. Validating a request...');
     const validation = await limitly.validation.validate(
-      'YQSMVNVRBUYXEFVTHJBHWJOYUURRHQFJ', // Use one of your actual API keys
+      'YQSOVNVRBOYWEFVAHJBHVJOYUURRHQNJ', // Use one of your actual API keys
       '/api/users',
       'GET'
     );
