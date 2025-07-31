@@ -1,6 +1,6 @@
 {
   "name": "@limitly/limitly-js",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Official Node.js SDK for Limitly - API Key management, plans, users and request validation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -53,5 +53,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "pnpm": {
+    "overrides": {
+      "axios": "^1.4.0"
+    }
   }
 }

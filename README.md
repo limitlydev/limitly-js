@@ -8,6 +8,26 @@ Official Node.js SDK for [Limitly](https://www.limitly.dev) - API Key management
 npm install @limitly/limitly-js
 ```
 
+```bash
+pnpm add @limitly/limitly-js
+```
+
+```bash
+yarn add @limitly/limitly-js
+```
+
+### Deno
+
+```bash
+deno add @limitly/limitly-js
+```
+
+Or import directly:
+
+```typescript
+import { Limitly } from "https://deno.land/x/limitly_js@v1.0.2/mod.ts";
+```
+
 ## 📖 Basic Usage
 
 ### Initialization

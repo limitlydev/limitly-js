@@ -1,13 +1,26 @@
 {
   "name": "@limitly/limitly-js",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./mod.ts",
       "types": "./dist/index.d.ts"
     }
   },
   "imports": {
     "axios": "npm:axios@^1.4.0"
+  },
+  "tasks": {
+    "test": "deno test --allow-net"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "fmt": {
+    "files": {
+      "include": ["mod.ts", "src/"]
+    }
   }
 } 
