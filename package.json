@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/limitlydev/limitly-js.git"
+    "url": "git+https://github.com/limitlydev/limitly-js.git"
   },
   "bugs": {
     "url": "https://github.com/limitlydev/limitly-js/issues"
@@ -54,4 +54,4 @@
   "publishConfig": {
     "access": "public"
   }
-} 
+}

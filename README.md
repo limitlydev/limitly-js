@@ -1,6 +1,6 @@
 # @limitly/limitly-js
 
-Official Node.js SDK for Limitly - API Key management, plans, users and request validation.
+Official Node.js SDK for [Limitly](https://www.limitly.dev) - API Key management, plans, users and request validation.
 
 ## 🚀 Installation
 
@@ -398,5 +398,6 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ## 🆘 Support
 
 - 📧 Email: hi@limitly.dev
+- 💻 Limitly: https://www.limitly.dev
 - 📖 Documentation: https://docs.limitly.com
 - 🐛 Issues: https://github.com/limitlydev/limitly-js/issues 

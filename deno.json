@@ -1,0 +1,13 @@
+{
+  "name": "@limitly/limitly-js",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "imports": {
+    "axios": "npm:axios@^1.4.0"
+  }
+} 
